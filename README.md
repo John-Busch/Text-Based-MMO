@@ -1,3 +1,5 @@
+AI SLOP TEST
+
 # Text Based MMO
 
 A small text-based MMO prototype. This repository currently contains a minimal entrypoint: `main.py`.
