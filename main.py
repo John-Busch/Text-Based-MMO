@@ -35,13 +35,29 @@ class Player:
 class Game:
     def __init__(self):
         self.player = None
-        self.locations = ["Village", "Forest", "Dungeon", "Castle"]
+        self.locations = ["Village", "Forest", "Dungeon", "Castle", "Cave", "Swamp", "Mountain"]
+
         self.enemies = [
-            {"name": "Goblin", "health": 20, "damage": 5, "xp": 50, "gold": 10},
-            {"name": "Orc", "health": 40, "damage": 10, "xp": 100, "gold": 25},
-            {"name": "Dragon", "health": 100, "damage": 20, "xp": 500, "gold": 100}
+            {"name": "Goblin", "health": 20, "damage": 5, "xp": 50, "gold": 10, "location": "Forest"},
+            {"name": "Orc", "health": 40, "damage": 10, "xp": 100, "gold": 25, "location": "Mountain"},
+            {"name": "Dragon", "health": 100, "damage": 20, "xp": 500, "gold": 100, "location": "Castle"},
+            {"name": "Bandit", "health": 30, "damage": 7, "xp": 75, "gold": 15, "location": "Forest"},
+            {"name": "Skeleton", "health": 25, "damage": 6, "xp": 60, "gold": 12, "location": "Dungeon"},
+            {"name": "Troll", "health": 50, "damage": 12, "xp": 150, "gold": 30, "location": "Swamp"},
+            {"name": "Vampire", "health": 60, "damage": 15, "xp": 200, "gold": 40, "location": "Castle"},
+            {"name": "Chicken", "health": 5, "damage": 1, "xp": 10, "gold": 2, "location": "Village"},
+            {"name": "Giant Spider", "health": 35, "damage": 8, "xp": 80, "gold": 20, "location": "Cave"},
+            {"name": "Zombie", "health": 30, "damage": 6, "xp": 70, "gold": 18, "location": "Dungeon"},
+            {"name": "Giant Snake", "health": 40, "damage": 10, "xp": 90, "gold": 22, "location": "Swamp"},
+            {"name": "Dark Knight", "health": 80, "damage": 18, "xp": 300, "gold": 50, "location": "Castle"},
+            {"name": "Giant Rat", "health": 15, "damage": 4, "xp": 30, "gold": 5, "location": "Cave"},
+            {"name": "Bandit Leader", "health": 45, "damage": 10, "xp": 120, "gold": 35, "location": "Forest"},
+            {"name": "Giant Worm", "health": 50, "damage": 12, "xp": 150, "gold": 30, "location": "Cave"},
+            {"name": "Lich", "health": 70, "damage": 15, "xp": 250, "gold": 45, "location": "Dungeon"},
+            {"name": "Chicken", "health": 5, "damage": 1, "xp": 10, "gold": 2, "location": "Village"},
+            {"name": "Slime", "health": 20, "damage": 3, "xp": 40, "gold": 8, "location": "Swamp"},
         ]
-    
+
     def start(self):
         print("Welcome to TextMMO!")
         name = input("Enter your character name: ")
@@ -76,6 +92,11 @@ class Game:
         print(f"\nYou travel to {location}...")
     
     def fight(self):
+        available_enemies = [e for e in self.enemies if e["location"] == self.player.location]
+
+        if not available_enemies:
+            print(f"No enemies found in {self.player.location}!")
+            return
         enemy = random.choice(self.enemies).copy()
         print(f"\nA {enemy['name']} appears! ({enemy['health']} HP)")
         
